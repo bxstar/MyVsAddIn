@@ -26,21 +26,51 @@ namespace RazorTplTest
         public string FunctionSummary { get; set; }
 
         /// <summary>
-        /// 方法的参数列表
-        /// </summary>
-        public List<ParameterModel> LstPara { get; set; }
-
-        /// <summary>
-        /// 函数返回的类型
-        /// </summary>
-        public string ReturnTypeFullName { get; set; }
-
-        /// <summary>
-        /// 函数返回的注释
+        /// 返回注释
         /// </summary>
         public string ReturnSummary { get; set; }
+
+        /// <summary>
+        /// 输入参数列表
+        /// </summary>
+        public List<ParameterModel> LstInputPara { get; set; }
+
+        /// <summary>
+        /// 输出参数列表
+        /// </summary>
+        public List<ParameterModel> LstOutputPara { get; set; }
+
+
+        /// <summary>
+        /// 输入或输出参数中所有自定义类型的参数
+        /// </summary>
+        public List<ParameterModel> LstAllCustomPara
+        {
+            get
+            {
+                if (LstInputPara == null)
+                    LstInputPara = new List<ParameterModel>();
+                if (LstOutputPara == null)
+                    LstOutputPara = new List<ParameterModel>();
+
+                List<ParameterModel> lst = new List<ParameterModel>();
+                foreach (ParameterModel para in LstInputPara.Union(LstOutputPara))
+                {
+                    Dictionary<string, int> dicParaGen = new Dictionary<string, int>();//已生成的自定义类型不再生成
+                    if (!para.IsBasicCSharpType && !dicParaGen.ContainsKey(para.ParameterTypeFullName))
+                    {
+                        lst.Add(para);
+                    }
+                }
+
+                return lst;
+            }
+        }
     }
 
+    /// <summary>
+    /// 参数定义
+    /// </summary>
     public class ParameterModel
     {
         /// <summary>
@@ -75,6 +105,26 @@ namespace RazorTplTest
             set
             {
                 _isBasicCSharpType = value;
+            }
+        }
+
+        /// <summary>
+        /// 默认该参数是单个的
+        /// </summary>
+        private Boolean _isSignleElement = true;
+
+        /// <summary>
+        /// 是否是单个元素
+        /// </summary>
+        public Boolean IsSignleElement
+        {
+            get
+            {
+                return _isSignleElement;
+            }
+            set
+            {
+                _isSignleElement = value;
             }
         }
 
