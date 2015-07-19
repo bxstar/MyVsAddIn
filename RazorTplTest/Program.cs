@@ -19,11 +19,83 @@ namespace RazorTplTest
         static void Main(string[] args)
         {
 
-            ReturnListParameterExample();
+            InputListParameterExample();
+        }
+
+        public static void InputListParameterExample()
+        {
+            var config = new TemplateServiceConfiguration();
+            config.DisableTempFileLocking = true;
+            config.CachingProvider = new DefaultCachingProvider(t => { });
+            var service = RazorEngineService.Create(config);
+
+            StreamReader sr = new StreamReader("simple_function_xsd_tpl.cshtml");
+
+            string template = sr.ReadToEnd();
+
+            FunctionModel data = new FunctionModel() { FunctionName = "SavePersonList", FunctionSummary = "批量保存人员信息", ReturnSummary = "人员的平均年龄和列表" };
+
+            ParameterModel intput_p1 = new ParameterModel();
+            intput_p1.ParameterName = "PersonList";
+            intput_p1.ParameterTypeFullName = "PersonModel";
+            intput_p1.ParameterSummary = "人员信息列表";
+            intput_p1.IsBasicCSharpType = false;
+            intput_p1.IsSignleElement = false;
+
+            ParameterModel input_p2_sub1 = new ParameterModel();
+            input_p2_sub1.ParameterName = "Name";
+            input_p2_sub1.ParameterTypeFullName = "string";
+            input_p2_sub1.ParameterSummary = "姓名";
+            ParameterModel input_p2_sub2 = new ParameterModel();
+            input_p2_sub2.ParameterName = "Age";
+            input_p2_sub2.ParameterTypeFullName = "int";
+            input_p2_sub2.ParameterSummary = "年龄";
+
+            intput_p1.LeafPara = new List<ParameterModel>();
+            intput_p1.LeafPara.Add(input_p2_sub1);
+            intput_p1.LeafPara.Add(input_p2_sub2);
+
+            data.LstInputPara = new List<ParameterModel>();
+            data.LstInputPara.Add(intput_p1);
+
+            ParameterModel output_p1 = new ParameterModel();
+            output_p1.ParameterName = "AvgAge";
+            output_p1.ParameterTypeFullName = "decimal";
+            output_p1.ParameterSummary = "人员的年龄平均值";
+
+            ParameterModel output_p2 = new ParameterModel();
+            output_p2.ParameterName = "PersonList";
+            output_p2.ParameterTypeFullName = "PersonModel";
+            output_p2.ParameterSummary = "人员信息列表";
+            output_p2.IsBasicCSharpType = false;
+            output_p2.IsSignleElement = false;
+
+            ParameterModel output_p2_sub1 = new ParameterModel();
+            output_p2_sub1.ParameterName = "Name";
+            output_p2_sub1.ParameterTypeFullName = "string";
+            output_p2_sub1.ParameterSummary = "姓名";
+            ParameterModel output_p2_sub2 = new ParameterModel();
+            output_p2_sub2.ParameterName = "Age";
+            output_p2_sub2.ParameterTypeFullName = "int";
+            output_p2_sub2.ParameterSummary = "年龄";
+
+            output_p2.LeafPara = new List<ParameterModel>();
+            output_p2.LeafPara.Add(output_p2_sub1);
+            output_p2.LeafPara.Add(output_p2_sub2);
+
+
+
+            data.LstOutputPara = new List<ParameterModel>();
+            data.LstOutputPara.Add(output_p1);
+            data.LstOutputPara.Add(output_p2);
+
+            string result = service.RunCompile(template, "templateKey", typeof(FunctionModel), data);
+
+            Console.WriteLine(result);
         }
 
         /// <summary>
-        /// 复杂参数，参数是用户自定义类型
+        /// 复杂参数，输出参数是用户自定义类型
         /// </summary>
         public static void ReturnListParameterExample()
         {
@@ -84,7 +156,7 @@ namespace RazorTplTest
 
 
         /// <summary>
-        /// 复杂参数，参数是用户自定义类型
+        /// 复杂参数，输入参数是用户自定义类型
         /// </summary>
         public static void ComplexParameterExample()
         {

@@ -14,23 +14,49 @@
         {
             if (para.IsBasicCSharpType)
             {//基本C#类型
-                <xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" minOccurs="0">
-                    <xs:annotation>
-                        <xs:documentation>
-                            @para.ParameterSummary
-                        </xs:documentation>
-                    </xs:annotation>
-                </xs:element>
+				if (para.IsSignleElement)
+                {
+					<xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+								@para.ParameterSummary
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				}
+				else
+				{
+					<xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>
+								@para.ParameterSummary
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				}
             }
             else
             {//自定义类型
-                <xs:element name="@para.ParameterName" type="ns:@para.ParameterTypeFullName" minOccurs="0">
-                    <xs:annotation>
-                        <xs:documentation>
-                            @para.ParameterSummary
-                        </xs:documentation>
-                    </xs:annotation>
-                </xs:element>
+				if (para.IsSignleElement)
+                {
+					<xs:element name="@para.ParameterName" type="ns:@para.ParameterTypeFullName" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+								@para.ParameterSummary
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				}
+				else
+				{
+					<xs:element name="@para.ParameterName" type="ns:@para.ParameterTypeFullName" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>
+								@para.ParameterSummary
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				}
             }
         }
     </xs:sequence>
@@ -116,23 +142,49 @@
             {
                 if (leafPara.IsBasicCSharpType)
                 {//基本C#类型
-                    <xs:element name="@leafPara.ParameterName" type="xs:@leafPara.ParameterTypeFullName" minOccurs="0">
-                        <xs:annotation>
-                            <xs:documentation>
-                                @leafPara.ParameterSummary
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    if (leafPara.IsSignleElement)
+					{
+						<xs:element name="@leafPara.ParameterName" type="xs:@leafPara.ParameterTypeFullName" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									@leafPara.ParameterSummary
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					}
+					else
+					{
+						<xs:element name="@leafPara.ParameterName" type="xs:@leafPara.ParameterTypeFullName" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>
+									@leafPara.ParameterSummary
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					}
                 }
                 else
                 {//有第二层自定义参数类型,都是为string，Json格式来处理
-                    <xs:element name="@leafPara.ParameterName" type="xs:string" minOccurs="0">
-                        <xs:annotation>
-                            <xs:documentation>
-                                @leafPara.ParameterSummary
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:element>
+                    if (leafPara.IsSignleElement)
+					{
+						<xs:element name="@leafPara.ParameterName" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									@leafPara.ParameterSummary
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					}
+					else
+					{
+						<xs:element name="@leafPara.ParameterName" type="xs:string" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>
+									@leafPara.ParameterSummary
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					}
                 }
             }
         </xs:sequence>

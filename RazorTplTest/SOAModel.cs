@@ -53,12 +53,13 @@ namespace RazorTplTest
                 if (LstOutputPara == null)
                     LstOutputPara = new List<ParameterModel>();
 
+                Dictionary<string, int> dicParaGen = new Dictionary<string, int>();//已生成的自定义类型不再生成
                 List<ParameterModel> lst = new List<ParameterModel>();
                 foreach (ParameterModel para in LstInputPara.Union(LstOutputPara))
                 {
-                    Dictionary<string, int> dicParaGen = new Dictionary<string, int>();//已生成的自定义类型不再生成
                     if (!para.IsBasicCSharpType && !dicParaGen.ContainsKey(para.ParameterTypeFullName))
                     {
+                        dicParaGen.Add(para.ParameterTypeFullName, 1);
                         lst.Add(para);
                     }
                 }
