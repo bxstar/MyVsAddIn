@@ -59,9 +59,29 @@ namespace RazorTplTest
         public string ParameterSummary { get; set; }
 
         /// <summary>
+        /// 默认是基本类型
+        /// </summary>
+        private Boolean _isBasicCSharpType = true;
+
+        /// <summary>
         /// 是否是C#中的基本类型
         /// </summary>
-        public Boolean IsBasicCSharpType { get; set; }
+        public Boolean IsBasicCSharpType 
+        {
+            get
+            {
+                return _isBasicCSharpType;
+            }
+            set
+            {
+                _isBasicCSharpType = value;
+            }
+        }
+
+        /// <summary>
+        /// 自定义参数类型的参数列表
+        /// </summary>
+        public List<ParameterModel> LeafPara { get; set; }
     }
 
 }

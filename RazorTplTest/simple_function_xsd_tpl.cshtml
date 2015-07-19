@@ -12,16 +12,71 @@
     <xs:sequence>
         @foreach (ParameterModel para in Model.LstPara)
         {
-        <xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" minOccurs="0">
+            if (para.IsBasicCSharpType)
+            {//基本C#类型
+                <xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            @para.ParameterSummary
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            }
+            else
+            {//自定义类型
+                <xs:element name="@para.ParameterName" type="ns:@para.ParameterTypeFullName" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            @para.ParameterSummary
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            }
+        }
+    </xs:sequence>
+</xs:complexType>
+
+@*如果输入参数有用户自定义的类型，则需要生成自定义参数类型的描述*@
+@foreach (ParameterModel para in Model.LstPara)
+{
+    if (!para.IsBasicCSharpType)
+    {//自定义类型
+        <xs:complexType name="@para.ParameterTypeFullName">
             <xs:annotation>
                 <xs:documentation>
                     @para.ParameterSummary
                 </xs:documentation>
+                <xs:appinfo>
+                </xs:appinfo>
             </xs:annotation>
-        </xs:element>
-        }
-    </xs:sequence>
-</xs:complexType>
+            <xs:sequence>
+                @foreach (ParameterModel leafPara in para.LeafPara)
+                {
+                    if (leafPara.IsBasicCSharpType)
+                    {//基本C#类型
+                        <xs:element name="@leafPara.ParameterName" type="xs:@leafPara.ParameterTypeFullName" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @leafPara.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                    else
+                    {//有第二层自定义参数类型,都是为string，Json格式来处理
+                        <xs:element name="@leafPara.ParameterName" type="xs:string" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @leafPara.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                }
+            </xs:sequence>
+        </xs:complexType>
+    }
+}
 
 <xs:element name="@(Model.FunctionName)Response" type="ns:@(Model.FunctionName)ResponseType" />
 <xs:complexType name="@(Model.FunctionName)ResponseType">
