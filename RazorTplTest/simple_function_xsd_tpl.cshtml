@@ -1,0 +1,43 @@
+﻿@*单个SOA函数的模版，参数是C#基本类型*@
+@using RazorTplTest
+<xs:element name="@(Model.FunctionName)Request" type="ns:@(Model.FunctionName)RequestType" />
+<xs:complexType name="@(Model.FunctionName)RequestType">
+    <xs:annotation>
+        <xs:documentation>
+            @(Model.FunctionSummary)
+        </xs:documentation>
+        <xs:appinfo>
+        </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+        @foreach (ParameterModel para in Model.LstPara)
+        {
+        <xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" minOccurs="0">
+            <xs:annotation>
+                <xs:documentation>
+                    @para.ParameterSummary
+                </xs:documentation>
+            </xs:annotation>
+        </xs:element>
+        }
+    </xs:sequence>
+</xs:complexType>
+
+<xs:element name="@(Model.FunctionName)Response" type="ns:@(Model.FunctionName)ResponseType" />
+<xs:complexType name="@(Model.FunctionName)ResponseType">
+    <xs:annotation>
+        <xs:documentation>
+            @Model.ReturnSummary
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <xs:element name="ResponseStatus" type="common:ResponseStatusType" />
+        <xs:element name="Result" type="xs:@Model.ReturnTypeFullName" minOccurs="0">
+            <xs:annotation>
+                <xs:documentation>
+                    @Model.ReturnSummary
+                </xs:documentation>
+            </xs:annotation>
+        </xs:element>
+    </xs:sequence>
+</xs:complexType>

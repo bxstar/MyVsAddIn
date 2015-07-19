@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="HelloWorldData"
+           targetnamespace="http://soa.ctrip.com/framework/soa/sample/v1"
+           elementformdefault="qualified"
+           attributeformdefault="unqualified"
+           xmlns="http://soa.ctrip.com/framework/soa/sample/v1"
+           xmlns:ns="http://soa.ctrip.com/framework/soa/sample/v1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://soa.ctrip.com/common/types/v1">
+    <xs:import id="SOACommonTypes" schemalocation="CTripSOACommonTypes_V1.0.0.xsd"
+               namespace="http://soa.ctrip.com/common/types/v1"></xs:import>
+
+    <xs:element name="HelloRequest" type="ns:HelloRequestType" />
+    <xs:complextype name="HelloRequestType">
+        <xs:annotation>
+            <xs:documentation>
+                Sample helloworld request
+            </xs:documentation>
+            <xs:appinfo>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" minoccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        If provided, service will response with Hello 'Name'.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complextype>
+
+    <xs:element name="HelloResponse" type="ns:HelloResponseType" />
+    <xs:complextype name="HelloResponseType">
+        <xs:annotation>
+            <xs:documentation>
+                Sample helloworld response
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ResponseStatus" type="common:ResponseStatusType" />
+            <xs:element name="Result" type="xs:string" minoccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        HelloWorld response result
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complextype>
+
+
+
+</xs:schema>

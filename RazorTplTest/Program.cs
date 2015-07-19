@@ -6,6 +6,7 @@ using System.Text;
 using RazorEngine;
 using RazorEngine.Templating;
 using RazorEngine.Configuration;
+using System.IO;
 
 
 namespace RazorTplTest
@@ -16,6 +17,43 @@ namespace RazorTplTest
     class Program
     {
         static void Main(string[] args)
+        {
+            var config = new TemplateServiceConfiguration();
+            config.DisableTempFileLocking = true;
+            config.CachingProvider = new DefaultCachingProvider(t => { });
+            var service = RazorEngineService.Create(config);
+
+            StreamReader sr = new StreamReader("simple_function_xsd_tpl.cshtml");
+
+            string template = sr.ReadToEnd();
+
+            FunctionModel data = new FunctionModel() { FunctionName = "AddNumber", FunctionSummary = "将两个数字相加", ReturnTypeFullName = "int", ReturnSummary = "数字相加之和" };
+            
+            ParameterModel p1 = new ParameterModel();
+            p1.ParameterName = "num1";
+            p1.ParameterTypeFullName = "int";
+            p1.ParameterSummary = "数字1";
+
+            ParameterModel p2 = new ParameterModel();
+            p2.ParameterName = "num2";
+            p2.ParameterTypeFullName = "int";
+            p2.ParameterSummary = "数字2";
+            
+
+            data.LstPara = new List<ParameterModel>();
+            data.LstPara.Add(p1);
+            data.LstPara.Add(p2);
+
+
+
+            string result = service.RunCompile(template, "templateKey", typeof(FunctionModel), data);
+
+            Console.WriteLine(result);
+            
+        }
+
+
+        public void Examples()
         {
             //RazorEngine3.3版本写法
             //string template = "Hello @Model.Name, welcome to RazorEngine!";
