@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30424</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{222D4E45-8C51-4BE9-B8C4-84B937373830}</ProjectGuid>
+    <ProjectGuid>{21B5A662-42FE-4634-BBDD-FB6E9A05B4EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <StartupObject>
     </StartupObject>
@@ -112,7 +112,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="C:\Users\admin\Documents\Visual Studio 2010\Addins\CtripAutoXSD - For Testing.AddIn">
+    <Content Include="..\..\..\..\..\Users\rsyu\Documents\Visual Studio 2010\Addins\CtripAutoXSD - For Testing.AddIn">
       <Link>CtripAutoXSD - For Testing.AddIn</Link>
     </Content>
     <Content Include="CtripAutoXSD.AddIn" />

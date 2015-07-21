@@ -19,8 +19,183 @@ namespace RazorTplTest
         static void Main(string[] args)
         {
 
-            InputListParameterExample();
+            AddRechargeOrderExample();
         }
+
+        public static void AddRechargeOrderExample()
+        {
+            var config = new TemplateServiceConfiguration();
+            config.DisableTempFileLocking = true;
+            config.CachingProvider = new DefaultCachingProvider(t => { });
+            var service = RazorEngineService.Create(config);
+
+            StreamReader sr = new StreamReader("simple_function_xsd_tpl.cshtml");
+
+            string template = sr.ReadToEnd();
+
+            FunctionModel data = new FunctionModel() { FunctionName = "AddBalanceRechargeOrder", FunctionSummary = "保存余额充值订单信息", ReturnSummary = "带订单号的余额充值订单及详情信息" };
+
+            ParameterModel intput_p1 = new ParameterModel();
+            intput_p1.ParameterName = "BalanceRechargeOrder";
+            intput_p1.ParameterTypeFullName = "BalanceRechargeOrderModel";
+            intput_p1.ParameterSummary = "余额充值订单信息";
+            intput_p1.IsBasicCSharpType = false;
+            intput_p1.IsSignleElement = true;
+
+            ParameterModel input_p1_sub1 = new ParameterModel();
+            input_p1_sub1.ParameterName = "BalanceRechargeID";
+            input_p1_sub1.ParameterTypeFullName = "long";
+            input_p1_sub1.ParameterSummary = "余额充值订单主键";
+            ParameterModel input_p1_sub2 = new ParameterModel();
+            input_p1_sub2.ParameterName = "LocalOrderID";
+            input_p1_sub2.ParameterTypeFullName = "long";
+            input_p1_sub2.ParameterSummary = "订单ID，显示给客户使用，由自增表生成";
+            ParameterModel input_p1_sub3 = new ParameterModel();
+            input_p1_sub3.ParameterName = "UID";
+            input_p1_sub3.ParameterTypeFullName = "string";
+            input_p1_sub3.ParameterSummary = "携程大系统UID";
+            ParameterModel input_p1_sub4 = new ParameterModel();
+            input_p1_sub4.ParameterName = "UserID";
+            input_p1_sub4.ParameterTypeFullName = "long";
+            input_p1_sub4.ParameterSummary = "福利内部用户ID";
+            ParameterModel input_p1_sub5 = new ParameterModel();
+            input_p1_sub5.ParameterName = "AccountID";
+            input_p1_sub5.ParameterTypeFullName = "long";
+            input_p1_sub5.ParameterSummary = "余额账户ID";
+            ParameterModel input_p1_sub6 = new ParameterModel();
+            input_p1_sub6.ParameterName = "OrderType";
+            input_p1_sub6.ParameterTypeFullName = "byte";
+            input_p1_sub6.ParameterSummary = "订单类型";
+            ParameterModel input_p1_sub7 = new ParameterModel();
+            input_p1_sub7.ParameterName = "OrderStatus";
+            input_p1_sub7.ParameterTypeFullName = "byte";
+            input_p1_sub7.ParameterSummary = "订单状态";
+            ParameterModel input_p1_sub8 = new ParameterModel();
+            input_p1_sub8.ParameterName = "PayType";
+            input_p1_sub8.ParameterTypeFullName = "byte";
+            input_p1_sub8.ParameterSummary = "订单支付方式";
+            ParameterModel input_p1_sub9 = new ParameterModel();
+            input_p1_sub9.ParameterName = "TotalCount";
+            input_p1_sub9.ParameterTypeFullName = "int";
+            input_p1_sub9.ParameterSummary = "总数量（子单）";
+            ParameterModel input_p1_sub10 = new ParameterModel();
+            input_p1_sub10.ParameterName = "TotalFaceAmount";
+            input_p1_sub10.ParameterTypeFullName = "decimal";
+            input_p1_sub10.ParameterSummary = "总面额";
+            ParameterModel input_p1_sub11 = new ParameterModel();
+            input_p1_sub11.ParameterName = "OrderAmount";
+            input_p1_sub11.ParameterTypeFullName = "decimal";
+            input_p1_sub11.ParameterSummary = "订单金额";
+            ParameterModel input_p1_sub12 = new ParameterModel();
+            input_p1_sub12.ParameterName = "PaidAmount";
+            input_p1_sub12.ParameterTypeFullName = "decimal";
+            input_p1_sub12.ParameterSummary = "已支付金额";
+            ParameterModel input_p1_sub13 = new ParameterModel();
+            input_p1_sub13.ParameterName = "IsInvoiced";
+            input_p1_sub13.ParameterTypeFullName = "boolean";
+            input_p1_sub13.ParameterSummary = "是否有发票";
+            ParameterModel input_p1_sub14 = new ParameterModel();
+            input_p1_sub14.ParameterName = "ContactName";
+            input_p1_sub14.ParameterTypeFullName = "string";
+            input_p1_sub14.ParameterSummary = "联系人姓名";
+            ParameterModel input_p1_sub15 = new ParameterModel();
+            input_p1_sub15.ParameterName = "CredentialType";
+            input_p1_sub15.ParameterTypeFullName = "byte";
+            input_p1_sub15.ParameterSummary = "证件类型";
+            ParameterModel input_p1_sub16 = new ParameterModel();
+            input_p1_sub16.ParameterName = "CredentialNo";
+            input_p1_sub16.ParameterTypeFullName = "string";
+            input_p1_sub16.ParameterSummary = "证件编号";
+            ParameterModel input_p1_sub17 = new ParameterModel();
+            input_p1_sub17.ParameterName = "MobileNo";
+            input_p1_sub17.ParameterTypeFullName = "string";
+            input_p1_sub17.ParameterSummary = "手机号码";
+            ParameterModel input_p1_sub18 = new ParameterModel();
+            input_p1_sub18.ParameterName = "ClientIP";
+            input_p1_sub18.ParameterTypeFullName = "string";
+            input_p1_sub18.ParameterSummary = "客户端IP";
+            ParameterModel input_p1_sub19 = new ParameterModel();
+            input_p1_sub19.ParameterName = "RewardBID";
+            input_p1_sub19.ParameterTypeFullName = "string";
+            input_p1_sub19.ParameterSummary = "奖励BID";
+            ParameterModel input_p1_sub20 = new ParameterModel();
+            input_p1_sub20.ParameterName = "DataChange_CreateTime";
+            input_p1_sub20.ParameterTypeFullName = "dateTime";
+            input_p1_sub20.ParameterSummary = "记录创建时间";
+            ParameterModel input_p1_sub21 = new ParameterModel();
+            input_p1_sub21.ParameterName = "DataChange_LastTime";
+            input_p1_sub21.ParameterTypeFullName = "dateTime";
+            input_p1_sub21.ParameterSummary = "最后更新时间";
+
+            intput_p1.LeafPara = new List<ParameterModel>();
+            intput_p1.LeafPara.Add(input_p1_sub1); intput_p1.LeafPara.Add(input_p1_sub2); intput_p1.LeafPara.Add(input_p1_sub3); intput_p1.LeafPara.Add(input_p1_sub4); intput_p1.LeafPara.Add(input_p1_sub5);
+            intput_p1.LeafPara.Add(input_p1_sub6); intput_p1.LeafPara.Add(input_p1_sub7); intput_p1.LeafPara.Add(input_p1_sub8); intput_p1.LeafPara.Add(input_p1_sub9); intput_p1.LeafPara.Add(input_p1_sub10);
+            intput_p1.LeafPara.Add(input_p1_sub11); intput_p1.LeafPara.Add(input_p1_sub12); intput_p1.LeafPara.Add(input_p1_sub13); intput_p1.LeafPara.Add(input_p1_sub14); intput_p1.LeafPara.Add(input_p1_sub15);
+            intput_p1.LeafPara.Add(input_p1_sub16); intput_p1.LeafPara.Add(input_p1_sub17); intput_p1.LeafPara.Add(input_p1_sub18); intput_p1.LeafPara.Add(input_p1_sub19); intput_p1.LeafPara.Add(input_p1_sub20);
+            intput_p1.LeafPara.Add(input_p1_sub21); 
+
+            data.LstInputPara = new List<ParameterModel>();
+            data.LstInputPara.Add(intput_p1);
+
+            //输出参数
+
+            ParameterModel output_p1 = new ParameterModel();
+            output_p1.ParameterName = "BalanceRechargeOrder";
+            output_p1.ParameterTypeFullName = "BalanceRechargeOrderModel";
+            output_p1.ParameterSummary = "余额充值订单信息";
+            output_p1.IsBasicCSharpType = false;
+            output_p1.IsSignleElement = true;
+
+            ParameterModel output_p2 = new ParameterModel();
+            output_p2.ParameterName = "BalanceRechargeOrderDetailList";
+            output_p2.ParameterTypeFullName = "BalanceRechargeOrderDetailModel";
+            output_p2.ParameterSummary = "余额充值订单详情列表";
+            output_p2.IsBasicCSharpType = false;
+            output_p2.IsSignleElement = false;
+
+            ParameterModel output_p2_sub1 = new ParameterModel();
+            output_p2_sub1.ParameterName = "BalanceRechargeDetailID";
+            output_p2_sub1.ParameterTypeFullName = "long";
+            output_p2_sub1.ParameterSummary = "余额充值订单详情ID";
+
+            ParameterModel output_p2_sub2 = new ParameterModel();
+            output_p2_sub2.ParameterName = "BalanceRechargeID";
+            output_p2_sub2.ParameterTypeFullName = "long";
+            output_p2_sub2.ParameterSummary = "关联余额充值订单ID";
+
+            ParameterModel output_p2_sub3 = new ParameterModel();
+            output_p2_sub3.ParameterName = "FaceAmount";
+            output_p2_sub3.ParameterTypeFullName = "decimal";
+            output_p2_sub3.ParameterSummary = "拆分后的面额";
+
+            ParameterModel output_p2_sub4 = new ParameterModel();
+            output_p2_sub4.ParameterName = "OrderAmount";
+            output_p2_sub4.ParameterTypeFullName = "decimal";
+            output_p2_sub4.ParameterSummary = "拆分后的订单金额";
+
+            ParameterModel output_p2_sub5 = new ParameterModel();
+            output_p2_sub5.ParameterName = "DataChange_CreateTime";
+            output_p2_sub5.ParameterTypeFullName = "dateTime";
+            output_p2_sub5.ParameterSummary = "记录创建时间";
+
+            ParameterModel output_p2_sub6 = new ParameterModel();
+            output_p2_sub6.ParameterName = "DataChange_LastTime";
+            output_p2_sub6.ParameterTypeFullName = "dateTime";
+            output_p2_sub6.ParameterSummary = "最后更新时间";
+
+            output_p2.LeafPara = new List<ParameterModel>();
+            output_p2.LeafPara.Add(output_p2_sub1); output_p2.LeafPara.Add(output_p2_sub2); output_p2.LeafPara.Add(output_p2_sub3); output_p2.LeafPara.Add(output_p2_sub4); output_p2.LeafPara.Add(output_p2_sub5); output_p2.LeafPara.Add(output_p2_sub6);
+
+
+            data.LstOutputPara = new List<ParameterModel>();
+            data.LstOutputPara.Add(output_p1);
+            data.LstOutputPara.Add(output_p2);
+
+            string result = service.RunCompile(template, "templateKey", typeof(FunctionModel), data);
+
+            Console.WriteLine(result);
+        }
+
 
         public static void InputListParameterExample()
         {
