@@ -97,7 +97,7 @@ namespace SOAModel
         /// <summary>
         /// 是否是C#中的基本类型
         /// </summary>
-        public Boolean IsBasicCSharpType 
+        public Boolean IsBasicCSharpType
         {
             get
             {
@@ -167,5 +167,4 @@ namespace SOAModel
         /// </summary>
         public List<ParameterModel> LeafPara { get; set; }
     }
-
 }

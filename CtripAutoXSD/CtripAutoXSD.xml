@@ -4,6 +4,127 @@
         <name>CtripAutoXSD</name>
     </assembly>
     <members>
+        <member name="M:CtripAutoXSD.Utils.GetXSDTypeFromCSharpType(System.String)">
+            <summary>
+            从CSharp类型转换为XSD类型
+            </summary>
+        </member>
+        <member name="M:CtripAutoXSD.Utils.IsCSharpBasicType(System.String)">
+            <summary>
+            是否是C#基本类型
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CtripAutoXSD.Utils.IsNillableType(System.String)">
+            <summary>
+            是否是可为null的类型
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CtripAutoXSD.Utils.GetTypeFullName(System.String)">
+            <summary>
+            用于程序集反射
+            </summary>
+            <param name="typeName">类型名，可能是List类型</param>
+            <returns></returns>
+        </member>
+        <member name="P:SOAModel.CtripXSDModel.LstFunc">
+            <summary>
+            由多个方法组成的XSD文件模型
+            </summary>
+        </member>
+        <member name="P:SOAModel.FunctionModel.FunctionName">
+            <summary>
+            方法名称
+            </summary>
+        </member>
+        <member name="P:SOAModel.FunctionModel.FunctionSummary">
+            <summary>
+            方法注释
+            </summary>
+        </member>
+        <member name="P:SOAModel.FunctionModel.ReturnSummary">
+            <summary>
+            返回注释
+            </summary>
+        </member>
+        <member name="P:SOAModel.FunctionModel.LstInputPara">
+            <summary>
+            输入参数列表
+            </summary>
+        </member>
+        <member name="P:SOAModel.FunctionModel.LstOutputPara">
+            <summary>
+            输出参数列表
+            </summary>
+        </member>
+        <member name="P:SOAModel.FunctionModel.LstAllCustomPara">
+            <summary>
+            输入或输出参数中所有自定义类型的参数
+            </summary>
+        </member>
+        <member name="T:SOAModel.ParameterModel">
+            <summary>
+            参数定义
+            </summary>
+        </member>
+        <member name="F:SOAModel.ParameterModel._isBasicCSharpType">
+            <summary>
+            默认是基本类型
+            </summary>
+        </member>
+        <member name="F:SOAModel.ParameterModel._isNillable">
+            <summary>
+            默认是不可为空的类型
+            </summary>
+        </member>
+        <member name="F:SOAModel.ParameterModel._isSignleElement">
+            <summary>
+            默认该参数是单个的
+            </summary>
+        </member>
+        <member name="P:SOAModel.ParameterModel.ParameterName">
+            <summary>
+            参数名称
+            </summary>
+        </member>
+        <member name="P:SOAModel.ParameterModel.ParameterTypeFullName">
+            <summary>
+            参数类型，如果是复合类型（非C#中的基本类型），还需要反射生成下面的类型定义
+            </summary>
+        </member>
+        <member name="P:SOAModel.ParameterModel.ParameterSummary">
+            <summary>
+            参数的注释
+            </summary>
+        </member>
+        <member name="P:SOAModel.ParameterModel.IsBasicCSharpType">
+            <summary>
+            是否是C#中的基本类型
+            </summary>
+        </member>
+        <member name="P:SOAModel.ParameterModel.IsNillable">
+            <summary>
+            是否是可为null类型
+            </summary>
+        </member>
+        <member name="P:SOAModel.ParameterModel.StrIsNillableInXSD">
+            <summary>
+            可为null的xsd中显示
+            </summary>
+        </member>
+        <member name="P:SOAModel.ParameterModel.IsSignleElement">
+            <summary>
+            是否是单个元素
+            </summary>
+        </member>
+        <member name="P:SOAModel.ParameterModel.LeafPara">
+            <summary>
+            自定义参数类型的参数列表
+            </summary>
+        </member>
         <member name="T:CtripAutoXSD.Connect">
             <summary>用于实现外接程序的对象。</summary>
             <seealso class='IDTExtensibility2' />

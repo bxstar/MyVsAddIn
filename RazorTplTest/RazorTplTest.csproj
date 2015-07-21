@@ -8,7 +8,7 @@
     <ProjectGuid>{0C9FF5C9-B78F-4425-8081-2E665916B3C7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RazorTplTest</RootNamespace>
+    <RootNamespace>SOAModel</RootNamespace>
     <AssemblyName>RazorTplTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>

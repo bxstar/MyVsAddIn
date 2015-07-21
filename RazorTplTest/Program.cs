@@ -7,6 +7,7 @@ using RazorEngine;
 using RazorEngine.Templating;
 using RazorEngine.Configuration;
 using System.IO;
+using SOAModel;
 
 
 namespace RazorTplTest
@@ -25,6 +26,7 @@ namespace RazorTplTest
         public static void AddRechargeOrderExample()
         {
             var config = new TemplateServiceConfiguration();
+            config.EncodedStringFactory = new RazorEngine.Text.RawStringFactory();
             config.DisableTempFileLocking = true;
             config.CachingProvider = new DefaultCachingProvider(t => { });
             var service = RazorEngineService.Create(config);
