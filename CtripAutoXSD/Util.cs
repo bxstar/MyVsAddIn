@@ -15,7 +15,7 @@ namespace CtripAutoXSD
             string result = string.Empty;
             if (typeName.Contains("<"))
             {//List<T>或Nullable<T>类型，取出T
-                typeName = typeName.Substring(typeName.IndexOf('<') + 1, (typeName.IndexOf('>') - typeName.IndexOf('<')) - 1);
+                typeName = GetTypeFullName(typeName);
             }
             else if(typeName.Contains("[["))
             {//Nullable[[System.Int64,
@@ -92,13 +92,16 @@ namespace CtripAutoXSD
         /// <returns></returns>
         public static string GetTypeFullName(string typeName)
         {
-            if (!typeName.Contains("List"))
+            if (!typeName.Contains("List") && !typeName.Contains("Tuple") && !typeName.Contains("<"))
             {
                 return typeName;
             }
             else
             {
-                return typeName.Substring(typeName.IndexOf('<') + 1, (typeName.IndexOf('>') - typeName.IndexOf('<')) - 1);   
+                if (typeName.Contains("<<"))
+                    typeName.Replace("<<", "<").Replace(">>", ">");
+                    
+                return typeName.Substring(typeName.IndexOf('<') + 1, (typeName.IndexOf('>') - typeName.IndexOf('<')) - 1);
             }
         }
     }
