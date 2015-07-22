@@ -121,9 +121,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\..\Users\rsyu\Documents\Visual Studio 2010\Addins\CtripAutoXSD - For Testing.AddIn">
-      <Link>CtripAutoXSD - For Testing.AddIn</Link>
-    </Content>
     <Content Include="CtripAutoXSD.AddIn" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
