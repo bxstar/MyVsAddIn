@@ -4,6 +4,28 @@
         <name>CtripAutoXSD</name>
     </assembly>
     <members>
+        <member name="T:CtripAutoXSD.AddInHelper">
+            <summary>
+            插件辅助类
+            </summary>
+        </member>
+        <member name="M:CtripAutoXSD.AddInHelper.Read">
+            <summary>
+            读取配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CtripAutoXSD.AddInHelper.Save(System.String)">
+            <summary>
+            保存配置
+            </summary>
+            <param name="content"></param>
+        </member>
+        <member name="P:CtripAutoXSD.AddInHelper.ModelPath">
+            <summary>
+            参数所属的Model路径，下面可以有多个dll，优先加载文件名有Model的dll
+            </summary>
+        </member>
         <member name="T:CtripAutoXSD.Connect">
             <summary>用于实现外接程序的对象。</summary>
             <seealso class='IDTExtensibility2' />
