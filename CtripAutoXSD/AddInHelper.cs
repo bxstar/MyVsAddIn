@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using System.Reflection;
 
 namespace CtripAutoXSD
 {
@@ -13,8 +14,13 @@ namespace CtripAutoXSD
     {
         static AddInHelper()
         {
-            string ModelFath = ConfigurationManager.AppSettings["ModelFath"];
-            //string location = Assembly.GetExecutingAssembly().Location;
+            string location = Assembly.GetExecutingAssembly().Location;
+            Configuration cfa = ConfigurationManager.OpenExeConfiguration(location);
+            ModelPath = cfa.AppSettings.Settings["ModelFath"].Value;
+            SimpleFunctionXSDTpl = cfa.AppSettings.Settings["SimpleFunctionXSD_Tpl_FullName"].Value;
+            CtripXSDTpl = cfa.AppSettings.Settings["CtripXSD_Tpl_FullName"].Value;
+            OutPutXSDFullName = cfa.AppSettings.Settings["OutPutXSDFullName"].Value;
+
             //string baseDir = Path.GetDirectoryName(location);
             //configXml = Path.Combine(baseDir, "VisualSPlusAddIn.xml");
         }
@@ -24,16 +30,36 @@ namespace CtripAutoXSD
         /// </summary>
         public static string ModelPath
         {
-            get
-            {
-                return ConfigurationManager.AppSettings["ModelFath"];
-            }
-            set
-            {
-                ConfigurationManager.AppSettings["ModelFath"] = value;
-            }
+            get;
+            set;
         }
 
+        /// <summary>
+        /// 单个函数的模版带路径文件名
+        /// </summary>
+        public static string SimpleFunctionXSDTpl
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// SOA定义文件的模版带路径名
+        /// </summary>
+        public static string CtripXSDTpl
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 输出的XSD文件名带路径
+        /// </summary>
+        public static string OutPutXSDFullName
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 读取配置

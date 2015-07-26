@@ -26,6 +26,21 @@
             参数所属的Model路径，下面可以有多个dll，优先加载文件名有Model的dll
             </summary>
         </member>
+        <member name="P:CtripAutoXSD.AddInHelper.SimpleFunctionXSDTpl">
+            <summary>
+            单个函数的模版带路径文件名
+            </summary>
+        </member>
+        <member name="P:CtripAutoXSD.AddInHelper.CtripXSDTpl">
+            <summary>
+            SOA定义文件的模版带路径名
+            </summary>
+        </member>
+        <member name="P:CtripAutoXSD.AddInHelper.OutPutXSDFullName">
+            <summary>
+            输出的XSD文件名带路径
+            </summary>
+        </member>
         <member name="T:CtripAutoXSD.Connect">
             <summary>用于实现外接程序的对象。</summary>
             <seealso class='IDTExtensibility2' />
@@ -192,11 +207,24 @@
             <param name="typeName"></param>
             <returns></returns>
         </member>
+        <member name="M:CtripAutoXSD.Utils.GetType(System.String)">
+            <summary>
+            在Dll的目录中获取指定类型
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CtripAutoXSD.Utils.GetTypeFullName(System.String)">
             <summary>
             用于程序集反射
             </summary>
             <param name="typeName">类型名，可能是List类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:CtripAutoXSD.Utils.WriteTemplateData(System.Object)">
+            <summary>
+            将数据写入模版
+            </summary>
+            <param name="data"></param>
             <returns></returns>
         </member>
     </members>
