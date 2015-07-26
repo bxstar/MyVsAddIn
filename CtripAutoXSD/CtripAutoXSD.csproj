@@ -47,6 +47,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\System.Web.Razor.dll</HintPath>
@@ -65,6 +66,12 @@
     </Compile>
     <Compile Include="SOAModel.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="VSConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VSConfig.designer.cs">
+      <DependentUpon>VSConfig.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="EnvDTE">
@@ -129,6 +136,11 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VSConfig.resx">
+      <DependentUpon>VSConfig.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
