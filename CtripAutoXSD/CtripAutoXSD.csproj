@@ -64,6 +64,11 @@
     <Compile Include="Connect.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ResourceUI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceUI.resx</DependentUpon>
+    </Compile>
     <Compile Include="SOAModel.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="VSConfig.cs">
@@ -130,6 +135,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ctrip.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CtripAutoXSD.AddIn" />
   </ItemGroup>
   <ItemGroup>
@@ -138,10 +146,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ResourceUI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceUI.Designer.cs</LastGenOutput>
+    </None>
     <EmbeddedResource Include="VSConfig.resx">
       <DependentUpon>VSConfig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
     <PreBuildEvent>

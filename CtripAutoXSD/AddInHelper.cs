@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 using System.Reflection;
+using System.IO;
 
 namespace CtripAutoXSD
 {
@@ -20,9 +21,6 @@ namespace CtripAutoXSD
             SimpleFunctionXSDTpl = cfa.AppSettings.Settings["SimpleFunctionXSD_Tpl_FullName"].Value;
             CtripXSDTpl = cfa.AppSettings.Settings["CtripXSD_Tpl_FullName"].Value;
             OutPutXSDFullName = cfa.AppSettings.Settings["OutPutXSDFullName"].Value;
-
-            //string baseDir = Path.GetDirectoryName(location);
-            //configXml = Path.Combine(baseDir, "VisualSPlusAddIn.xml");
         }
 
         /// <summary>
@@ -59,6 +57,20 @@ namespace CtripAutoXSD
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public static string CtripICO
+        {
+            get
+            {
+                string location = Assembly.GetExecutingAssembly().Location;
+                string baseDir = Path.GetDirectoryName(location);
+                string str = Path.Combine(baseDir, "ctrip.png");
+                return str;
+            }
         }
 
         /// <summary>
