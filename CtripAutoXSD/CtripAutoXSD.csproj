@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\System.Web.Razor.dll</HintPath>
@@ -63,11 +64,6 @@
     </Compile>
     <Compile Include="Connect.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ResourceUI.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ResourceUI.resx</DependentUpon>
     </Compile>
     <Compile Include="SOAModel.cs" />
     <Compile Include="Util.cs" />
@@ -146,10 +142,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ResourceUI.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceUI.Designer.cs</LastGenOutput>
-    </None>
     <EmbeddedResource Include="VSConfig.resx">
       <DependentUpon>VSConfig.cs</DependentUpon>
     </EmbeddedResource>

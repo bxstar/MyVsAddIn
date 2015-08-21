@@ -17,7 +17,7 @@ namespace CtripAutoXSD
         {
             string location = Assembly.GetExecutingAssembly().Location;
             Configuration cfa = ConfigurationManager.OpenExeConfiguration(location);
-            ModelPath = cfa.AppSettings.Settings["ModelFath"].Value;
+            ModelPath = cfa.AppSettings.Settings["ModelPath"].Value;
             SimpleFunctionXSDTpl = cfa.AppSettings.Settings["SimpleFunctionXSD_Tpl_FullName"].Value;
             CtripXSDTpl = cfa.AppSettings.Settings["CtripXSD_Tpl_FullName"].Value;
             OutPutXSDFullName = cfa.AppSettings.Settings["OutPutXSDFullName"].Value;
