@@ -1,9 +1,9 @@
 ﻿@*单个SOA函数的模版，参数是C#基本类型*@
 @using SOAModel
 @using System.Web.Razor
-@model IEnumerable<FunctionModel>
+@model CtripXSDModel
 
-@foreach (FunctionModel itemModel in Model)
+@foreach (FunctionModel itemModel in Model.LstFunc)
 {
     <xs:element name="@(itemModel.FunctionName)Request" type="@(itemModel.FunctionName)RequestType" />
     <xs:complextype name="@(itemModel.FunctionName)RequestType">
@@ -130,4 +130,71 @@
             }
         </xs:sequence>
     </xs:complextype>
+}
+
+@*如果输入或输出参数有用户自定义的类型，则需要生成自定义参数类型的描述*@
+@foreach (ParameterModel para in Model.LstAllCustomPara)
+{
+
+    <xs:complextype name="@para.ParameterTypeFullName">
+        <xs:annotation>
+            <xs:documentation>
+                @para.ParameterSummary
+            </xs:documentation>
+            <xs:appinfo>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+            @foreach (ParameterModel leafPara in para.LeafPara)
+            {
+                if (leafPara.IsBasicCSharpType)
+                {//基本C#类型
+                    if (leafPara.IsSignleElement)
+                    {
+                        <xs:element name="@leafPara.ParameterName" type="xs:@leafPara.ParameterTypeFullName" minoccurs="0" @leafPara.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @leafPara.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                    else
+                    {
+                        <xs:element name="@leafPara.ParameterName" type="xs:@leafPara.ParameterTypeFullName" maxoccurs="unbounded" @leafPara.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @leafPara.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                }
+                else
+                {//有第二层自定义参数类型,都是为string，Json格式来处理
+                    if (leafPara.IsSignleElement)
+                    {
+                        <xs:element name="@leafPara.ParameterName" type="xs:string" minoccurs="0" @leafPara.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @leafPara.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                    else
+                    {
+                        <xs:element name="@leafPara.ParameterName" type="xs:string" maxoccurs="unbounded" @leafPara.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @leafPara.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                }
+            }
+        </xs:sequence>
+    </xs:complextype>
+
 }

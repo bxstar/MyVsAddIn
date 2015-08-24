@@ -10,7 +10,37 @@ namespace SOAModel
         /// <summary>
         /// 由多个方法组成的XSD文件模型
         /// </summary>
-        List<FunctionModel> LstFunc { get; set; }
+        public List<FunctionModel> LstFunc { get; set; }
+
+        /// <summary>
+        /// 输入或输出参数中所有自定义类型的参数
+        /// </summary>
+        public List<ParameterModel> LstAllCustomPara
+        {
+            get
+            {
+                Dictionary<string, int> dicParaGen = new Dictionary<string, int>();//已生成的自定义类型不再生成
+                List<ParameterModel> lst = new List<ParameterModel>();
+                foreach (var item in LstFunc)
+                {
+                    if (item.LstInputPara == null)
+                        item.LstInputPara = new List<ParameterModel>();
+                    if (item.LstOutputPara == null)
+                        item.LstOutputPara = new List<ParameterModel>();
+
+                    foreach (ParameterModel para in item.LstInputPara.Union(item.LstOutputPara))
+                    {
+                        if (!para.IsBasicCSharpType && !dicParaGen.ContainsKey(para.ParameterTypeFullName))
+                        {
+                            dicParaGen.Add(para.ParameterTypeFullName, 1);
+                            lst.Add(para);
+                        }
+                    }
+                }
+
+                return lst;
+            }
+        }
     }
 
     public class FunctionModel
