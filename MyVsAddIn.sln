@@ -1,9 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorTplTest", "RazorTplTest\RazorTplTest.csproj", "{0C9FF5C9-B78F-4425-8081-2E665916B3C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtripAutoXSD", "CtripAutoXSD\CtripAutoXSD.csproj", "{21B5A662-42FE-4634-BBDD-FB6E9A05B4EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc4", "Mvc4\Mvc4.csproj", "{0FF863A9-2546-48A0-8A9A-993BF9586950}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,16 @@ Global
 		{21B5A662-42FE-4634-BBDD-FB6E9A05B4EA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{21B5A662-42FE-4634-BBDD-FB6E9A05B4EA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{21B5A662-42FE-4634-BBDD-FB6E9A05B4EA}.Release|x86.ActiveCfg = Release|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0FF863A9-2546-48A0-8A9A-993BF9586950}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

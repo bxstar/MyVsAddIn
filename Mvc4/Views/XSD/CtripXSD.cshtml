@@ -1,0 +1,133 @@
+﻿@*单个SOA函数的模版，参数是C#基本类型*@
+@using SOAModel
+@using System.Web.Razor
+@model IEnumerable<FunctionModel>
+
+@foreach (FunctionModel itemModel in Model)
+{
+    <xs:element name="@(itemModel.FunctionName)Request" type="@(itemModel.FunctionName)RequestType" />
+    <xs:complextype name="@(itemModel.FunctionName)RequestType">
+        <xs:annotation>
+            <xs:documentation>
+                @(itemModel.FunctionSummary)
+            </xs:documentation>
+            <xs:appinfo>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+            @foreach (ParameterModel para in itemModel.LstInputPara)
+            {
+                if (para.IsBasicCSharpType)
+                {//基本C#类型
+                    if (para.IsSignleElement)
+                    {
+                        <xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" minoccurs="0" @para.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @para.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                    else
+                    {
+                        <xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" maxoccurs="unbounded" @para.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @para.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                }
+                else
+                {//自定义类型
+                    if (para.IsSignleElement)
+                    {
+                        <xs:element name="@para.ParameterName" type="@para.ParameterTypeFullName" minoccurs="0" @para.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @para.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                    else
+                    {
+                        <xs:element name="@para.ParameterName" type="@para.ParameterTypeFullName" maxoccurs="unbounded" @para.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @para.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                }
+            }
+        </xs:sequence>
+    </xs:complextype>
+
+    <xs:element name="@(itemModel.FunctionName)Response" type="@(itemModel.FunctionName)ResponseType" />
+    <xs:complextype name="@(itemModel.FunctionName)ResponseType">
+        <xs:annotation>
+            <xs:documentation>
+                @(itemModel.ReturnSummary)
+            </xs:documentation>
+            <xs:appinfo>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ResponseStatus" type="ns1:ResponseStatusType" />
+            <xs:element name="Result" type="ns2:OperateResultType" />
+            @foreach (ParameterModel para in itemModel.LstOutputPara)
+            {
+                if (para.IsBasicCSharpType)
+                {//基本C#类型
+                    if (para.IsSignleElement)
+                    {
+                        <xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" minoccurs="0" @para.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @para.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                    else
+                    {
+                        <xs:element name="@para.ParameterName" type="xs:@para.ParameterTypeFullName" maxoccurs="unbounded" @para.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @para.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                }
+                else
+                {//自定义类型
+                    if (para.IsSignleElement)
+                    {
+                        <xs:element name="@para.ParameterName" type="@para.ParameterTypeFullName" minoccurs="0" @para.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @para.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                    else
+                    {
+                        <xs:element name="@para.ParameterName" type="@para.ParameterTypeFullName" maxoccurs="unbounded" @para.StrIsNillableInXSD>
+                            <xs:annotation>
+                                <xs:documentation>
+                                    @para.ParameterSummary
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    }
+                }
+            }
+        </xs:sequence>
+    </xs:complextype>
+}
